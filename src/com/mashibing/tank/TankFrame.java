@@ -16,8 +16,16 @@ public class TankFrame extends Frame {
     /**
      * new出主坦克
      */
-    Tank myTank = new Tank(200, 200, Dir.UP, this);
+    Tank myTank = new Tank(200, 400, Dir.UP, this);
+    /**
+     * 子弹列表
+     */
     List<Bullet> bullets = new ArrayList<>();
+
+    /**
+     * 敌人坦克
+     */
+    List<Tank> tanks = new ArrayList<>();
 
     /**
      * 游戏的宽和高
@@ -76,11 +84,16 @@ public class TankFrame extends Frame {
         g.drawString("子弹数量：" + bullets.size(), 10, 60);
         g.setColor(c);
 
+        //画出主坦克
         myTank.paint(g);
+        //画出子弹
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
         }
-
+        //画出敌人坦克
+        for (int i = 0; i < tanks.size(); i++) {
+            tanks.get(i).paint(g);
+        }
         //x += 10;
         //y += 10;
     }
