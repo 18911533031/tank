@@ -30,6 +30,11 @@ public class Bullet {
     private boolean living = true;
 
     /**
+     * 子弹区分队伍
+     */
+    private Group group = Group.GOOD;
+
+    /**
      * 子弹构造方法
      *
      * @param x   x轴
@@ -37,10 +42,11 @@ public class Bullet {
      * @param dir 方向
      * @param tf  主方法
      */
-    public Bullet(int x, int y, Dir dir, TankFrame tf) {
+    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -128,6 +134,9 @@ public class Bullet {
     }
 
     public void collidewith(Tank tank) {
+        if (this.group == tank.getGroup()) return;
+
+        //TODO 用一个rect来处理，现在方法每次循环都要new出多个对象
         Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
         if (rect1.intersects(rect2)) {

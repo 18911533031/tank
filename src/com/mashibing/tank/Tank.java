@@ -1,6 +1,7 @@
 package com.mashibing.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Tank {
 
@@ -14,12 +15,38 @@ public class Tank {
     /**
      * 移动速度
      */
-    private static final int SPEED = 3;
+    private static final int SPEED = 1;
 
     /**
      * 是否活着
      */
     private boolean living = true;
+
+    /**
+     * 发射子弹随机
+     */
+    private Random random = new Random();
+
+    /**
+     * 区分队伍
+     */
+    private Group group = Group.GOOD;
+
+    public boolean isLiving() {
+        return living;
+    }
+
+    public void setLiving(boolean living) {
+        this.living = living;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
     /**
      * 图片的宽高
@@ -35,7 +62,7 @@ public class Tank {
     /**
      * true移动，false停止
      */
-    private boolean moving = false;
+    private boolean moving = true;
 
     /**
      * 坦克构造方法
@@ -45,10 +72,11 @@ public class Tank {
      * @param dir 方向
      * @param tf  主方法
      */
-    public Tank(int x, int y, Dir dir, TankFrame tf) {
+    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tf = tf;
     }
 
@@ -108,6 +136,8 @@ public class Tank {
                 y += SPEED;
                 break;
         }
+
+        if (random.nextInt(10) > 8 && this.group == Group.BAD) this.fire();
     }
 
     public int getX() {
@@ -146,7 +176,7 @@ public class Tank {
         //正方形情况下：x+2分1之坦克宽度 - 子弹2分1宽度
         int bX = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.y + HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.bullets.add(new Bullet(bX + 1, bY + 4, this.dir, this.tf));
+        tf.bullets.add(new Bullet(bX + 1, bY + 4, this.dir, this.group, this.tf));
     }
 
     public void die() {

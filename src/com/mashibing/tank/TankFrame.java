@@ -16,7 +16,7 @@ public class TankFrame extends Frame {
     /**
      * new出主坦克
      */
-    Tank myTank = new Tank(200, 400, Dir.UP, this);
+    Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
     /**
      * 子弹列表
      */
@@ -119,7 +119,7 @@ public class TankFrame extends Frame {
         /**
          * 按键按下
          *
-         * @param e
+         * @param e 获取按键
          */
         @Override
         public void keyPressed(KeyEvent e) {
@@ -148,7 +148,7 @@ public class TankFrame extends Frame {
         /**
          * 按键抬起
          *
-         * @param e
+         * @param e 获取按键
          */
         @Override
         public void keyReleased(KeyEvent e) {
