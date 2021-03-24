@@ -27,14 +27,15 @@ public class Bullet {
     /**
      * 是否移除
      */
-    private boolean live = true;
+    private boolean living = true;
 
     /**
      * 子弹构造方法
-     * @param x x轴
-     * @param y y轴
+     *
+     * @param x   x轴
+     * @param y   y轴
      * @param dir 方向
-     * @param tf 主方法
+     * @param tf  主方法
      */
     public Bullet(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
@@ -45,11 +46,12 @@ public class Bullet {
 
     /**
      * 画出子弹
+     *
      * @param g 画笔
      */
     public void paint(Graphics g) {
         //判断子弹是否移除
-        if (!live) {
+        if (!living) {
             tf.bullets.remove(this);
         }
 
@@ -97,7 +99,7 @@ public class Bullet {
                 y += SPEED;
                 break;
         }
-        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) live = false;
+        if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) living = false;
 
     }
 
@@ -123,5 +125,18 @@ public class Bullet {
 
     public void setDir(Dir dir) {
         this.dir = dir;
+    }
+
+    public void collidewith(Tank tank) {
+        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        if (rect1.intersects(rect2)) {
+            this.die();
+            tank.die();
+        }
+    }
+
+    private void die() {
+        this.living = false;
     }
 }

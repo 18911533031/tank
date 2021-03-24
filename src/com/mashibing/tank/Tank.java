@@ -17,6 +17,11 @@ public class Tank {
     private static final int SPEED = 3;
 
     /**
+     * 是否活着
+     */
+    private boolean living = true;
+
+    /**
      * 图片的宽高
      */
     public static int WIDTH = ResourceMgr.tankD.getWidth();
@@ -34,10 +39,11 @@ public class Tank {
 
     /**
      * 坦克构造方法
-     * @param x x轴
-     * @param y y轴
+     *
+     * @param x   x轴
+     * @param y   y轴
      * @param dir 方向
-     * @param tf 主方法
+     * @param tf  主方法
      */
     public Tank(int x, int y, Dir dir, TankFrame tf) {
         this.x = x;
@@ -50,6 +56,10 @@ public class Tank {
      * 画出坦克
      */
     public void paint(Graphics g) {
+
+        if (!living) {
+            tf.tanks.remove(this);
+        }
 
         //黑方块
 //        Color color = g.getColor();
@@ -137,5 +147,9 @@ public class Tank {
         int bX = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.y + HEIGHT / 2 - Bullet.HEIGHT / 2;
         tf.bullets.add(new Bullet(bX + 1, bY + 4, this.dir, this.tf));
+    }
+
+    public void die() {
+        this.living = false;
     }
 }
