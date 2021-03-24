@@ -1,8 +1,6 @@
 package com.mashibing.tank;
 
 
-
-
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -21,11 +19,14 @@ public class TankFrame extends Frame {
      * 子弹列表
      */
     List<Bullet> bullets = new ArrayList<>();
-
     /**
      * 敌人坦克
      */
     List<Tank> tanks = new ArrayList<>();
+    /**
+     * 爆炸效果
+     */
+    Explode e = new Explode(100, 100, this);
 
     /**
      * 游戏的宽和高
@@ -54,6 +55,7 @@ public class TankFrame extends Frame {
 
     /**
      * 双缓冲机制，防止坦克闪烁
+     *
      * @param g 画笔
      */
     @Override
@@ -95,6 +97,8 @@ public class TankFrame extends Frame {
         for (int i = 0; i < tanks.size(); i++) {
             tanks.get(i).paint(g);
         }
+        //爆炸效果
+        e.paint(g);
 
         //碰撞检测
         for (int j = 0; j < tanks.size(); j++) {
