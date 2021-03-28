@@ -27,6 +27,10 @@ public class TankFrame extends Frame {
      * 爆炸效果
      */
     Explode e = new Explode(100, 100, this);
+    /**
+     * 爆炸集合
+     */
+    List<Explode> explodes = new ArrayList<>();
 
     /**
      * 游戏的宽和高
@@ -98,7 +102,10 @@ public class TankFrame extends Frame {
             tanks.get(i).paint(g);
         }
         //爆炸效果
-        e.paint(g);
+//        e.paint(g);
+        for (int i = 0; i < explodes.size(); i++) {
+            explodes.get(i).paint(g);
+        }
 
         //碰撞检测
         for (int j = 0; j < tanks.size(); j++) {
