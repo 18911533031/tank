@@ -7,9 +7,14 @@ import java.io.IOException;
 public class ResourceMgr {
 
     /**
-     * 坦克图片加载
+     * 敌人坦克图片加载
      */
-    public static BufferedImage tankL, tankU, tankR, tankD;
+    public static BufferedImage badTankL, badTankU, badTankR, badTankD;
+
+    /**
+     * 己方坦克图片加载
+     */
+    public static BufferedImage goodTankL, goodTankU, goodTankR, goodTankD;
 
     /**
      * 子弹图片加载
@@ -23,10 +28,15 @@ public class ResourceMgr {
 
     static {
         try {
-            tankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images\\BadTank1.png"));
-            tankL = ImageUtil.rotateImage(tankU, -90);
-            tankR = ImageUtil.rotateImage(tankU, 90);
-            tankD = ImageUtil.rotateImage(tankU, 180);
+            badTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images\\BadTank1.png"));
+            badTankL = ImageUtil.rotateImage(badTankU, -90);
+            badTankR = ImageUtil.rotateImage(badTankU, 90);
+            badTankD = ImageUtil.rotateImage(badTankU, 180);
+
+            goodTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images\\GoodTank1.png"));
+            goodTankL = ImageUtil.rotateImage(goodTankU, -90);
+            goodTankR = ImageUtil.rotateImage(goodTankU, 90);
+            goodTankD = ImageUtil.rotateImage(goodTankU, 180);
 
             bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images\\bulletU.png"));
             bulletL = ImageUtil.rotateImage(bulletU, -90);
