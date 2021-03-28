@@ -15,7 +15,7 @@ public class Tank {
     /**
      * 移动速度
      */
-    private static final int SPEED = 1;
+    private static final int SPEED = 5;
 
     /**
      * 是否活着
@@ -99,16 +99,16 @@ public class Tank {
         //坦克
         switch (dir) {
             case LEFT:
-                g.drawImage(this.group == Group.BAD?ResourceMgr.badTankL : ResourceMgr.goodTankL, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankL : ResourceMgr.goodTankL, x, y, null);
                 break;
             case UP:
-                g.drawImage(this.group == Group.BAD?ResourceMgr.badTankU : ResourceMgr.goodTankU, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankU : ResourceMgr.goodTankU, x, y, null);
                 break;
             case RIGHT:
-                g.drawImage(this.group == Group.BAD?ResourceMgr.badTankR : ResourceMgr.goodTankR, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankR : ResourceMgr.goodTankR, x, y, null);
                 break;
             case DOWN:
-                g.drawImage(this.group == Group.BAD?ResourceMgr.badTankD : ResourceMgr.goodTankD, x, y, null);
+                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankD : ResourceMgr.goodTankD, x, y, null);
                 break;
         }
 
@@ -143,6 +143,19 @@ public class Tank {
         //随机变换方向
         if (this.group == Group.BAD && random.nextInt(100) > 96)
             randomDir();
+
+        //边界检测
+        boundsCheck();
+    }
+
+    /**
+     * 边界检测
+     */
+    private void boundsCheck() {
+        if (this.x < 2) x = 2;
+        if (this.y < 28) y = 28;
+        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
+        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
     }
 
     /**
