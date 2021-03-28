@@ -133,6 +133,11 @@ public class Bullet {
         this.dir = dir;
     }
 
+    /**
+     * 碰撞检测
+     *
+     * @param tank 当前坦克
+     */
     public void collidewith(Tank tank) {
         if (this.group == tank.getGroup()) return;
 
@@ -142,7 +147,9 @@ public class Bullet {
         if (rect1.intersects(rect2)) {
             this.die();
             tank.die();
-            tf.explodes.add(new Explode(x,y,tf));
+            int eX = tank.getX() + tank.WIDTH / 2 - Explode.WIDTH / 2;
+            int eY = tank.getY() + tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+            tf.explodes.add(new Explode(eX, eY, tf));
         }
     }
 
