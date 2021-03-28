@@ -10,6 +10,8 @@ public class Bullet {
     private static final int SPEED = 10;
     private int x = 300, y = 300;
 
+    Rectangle rect = new Rectangle();
+
     /**
      * 方向
      */
@@ -48,6 +50,11 @@ public class Bullet {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        rect.x = x;
+        rect.y = y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     /**
@@ -84,6 +91,9 @@ public class Bullet {
         }
 
         move();
+
+        rect.x = x;
+        rect.y = y;
     }
 
     /**
@@ -141,10 +151,10 @@ public class Bullet {
     public void collidewith(Tank tank) {
         if (this.group == tank.getGroup()) return;
 
-        //TODO 用一个rect来处理，现在方法每次循环都要new出多个对象
-        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
-        if (rect1.intersects(rect2)) {
+        //TODO 用一个rect来处理，现在方法每次循环都要new出多个对象 --已解决
+//        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
+//        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+        if (rect.intersects(tank.rect)) {
             this.die();
             tank.die();
             int eX = tank.getX() + tank.WIDTH / 2 - Explode.WIDTH / 2;

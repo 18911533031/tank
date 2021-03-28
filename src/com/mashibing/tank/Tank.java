@@ -7,6 +7,8 @@ public class Tank {
 
     private int x, y;
 
+    Rectangle rect = new Rectangle();
+
     /**
      * 方向
      */
@@ -78,6 +80,11 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tf = tf;
+
+        rect.x = x;
+        rect.y = y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     /**
@@ -146,6 +153,9 @@ public class Tank {
 
         //边界检测
         boundsCheck();
+
+        rect.x = this.x;
+        rect.y = this.y;
     }
 
     /**
