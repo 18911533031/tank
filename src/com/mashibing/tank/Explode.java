@@ -33,10 +33,12 @@ public class Explode {
         this.x = x;
         this.y = y;
         this.tf = tf;
+
+        new Thread(()->new Audio("audio/explode.wav").play()).start();
     }
 
     /**
-     * 画出子弹
+     * 画出爆炸
      *
      * @param g 画笔
      */
