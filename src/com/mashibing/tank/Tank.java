@@ -137,7 +137,19 @@ public class Tank {
                 break;
         }
 
-        if (random.nextInt(10) > 8 && this.group == Group.BAD) this.fire();
+        //随机发射子弹
+        if (random.nextInt(100) > 95 && this.group == Group.BAD) this.fire();
+
+        //随机变换方向
+        if (this.group == Group.BAD && random.nextInt(100) > 96)
+            randomDir();
+    }
+
+    /**
+     * 随机变换方向
+     */
+    private void randomDir() {
+        this.dir = Dir.values()[random.nextInt(4)];
     }
 
     public int getX() {
