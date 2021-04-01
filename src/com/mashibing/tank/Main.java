@@ -5,12 +5,11 @@ public class Main {
     /**
      * 执行方法
      * @param args 无
-     * @throws InterruptedException
+     * @throws InterruptedException 异常
      */
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
-
-        int initTankCount = Integer.parseInt((String)PropertyMgr.get("initTankCount"));
+        int initTankCount = Integer.parseInt((String)PropertyMgr.getInstance().getKey("initTankCount"));
 
         for (int i = 0; i < initTankCount; i++) {
             tf.tanks.add(new Tank(80 + i* 60, 80, Dir.DOWN, Group.BAD, tf));
