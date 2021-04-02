@@ -7,7 +7,8 @@ package com.mashibing.singleton;
  */
 public class Mgr06 {
 
-    private static Mgr06 INSTANCE;
+    //双重判断需要加上volatile
+    private static volatile Mgr06 INSTANCE;
 
     private Mgr06() {
     }
