@@ -35,7 +35,7 @@ public class TankFrame extends Frame {
     /**
      * 游戏的宽和高
      */
-    static final int GAME_WIDTH = 800, GAME_HEIGHT = 600;
+    static final int GAME_WIDTH = 1200, GAME_HEIGHT = 1000;
 
     /**
      * 生成游戏界面

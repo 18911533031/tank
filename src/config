@@ -1,2 +1,4 @@
 #初始化地方坦克数量
-initTankCount=10
+initTankCount=100
+defaultFire=com.mashibing.tank.DefaultFireStartegy
+fourDirFire=com.mashibing.tank.FourDirFireStartegy

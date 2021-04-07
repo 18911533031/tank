@@ -59,12 +59,14 @@ public class Tank {
     /**
      * 主方法
      */
-    private TankFrame tf = null;
+    TankFrame tf = null;
 
     /**
      * true移动，false停止
      */
     private boolean moving = true;
+
+    private FireStartegy fs;
 
     /**
      * 坦克构造方法
@@ -85,6 +87,28 @@ public class Tank {
         rect.y = y;
         rect.width = WIDTH;
         rect.height = HEIGHT;
+
+        /**
+         * 主角光环，发射四个方向子弹
+         */
+        PropertyMgr propertyMgr = PropertyMgr.getInstance();
+        if (group == Group.BAD){
+            String defaultFire = (String) propertyMgr.getKey("defaultFire");
+            try {
+                fs = (FireStartegy) Class.forName(defaultFire).newInstance();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+//            fs = new DefaultFireStartegy();
+        }else {
+            String fourDirFire = (String) propertyMgr.getKey("fourDirFire");
+            try {
+                fs = (FireStartegy) Class.forName(fourDirFire).newInstance();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+//            fs = new FourDirFireStartegy();
+        }
     }
 
     /**
@@ -208,12 +232,7 @@ public class Tank {
     }
 
     public void fire() {
-        //正方形情况下：x+2分1之坦克宽度 - 子弹2分1宽度
-        int bX = this.x + WIDTH / 2 - Bullet.WIDTH / 2;
-        int bY = this.y + HEIGHT / 2 - Bullet.HEIGHT / 2;
-        tf.bullets.add(new Bullet(bX + 1, bY + 4, this.dir, this.group, this.tf));
-
-        if(this.group == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+        fs.fire(this);
     }
 
     public void die() {
