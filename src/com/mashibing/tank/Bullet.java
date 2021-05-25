@@ -1,8 +1,10 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.abstractfactory.BaseBullet;
+
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends BaseBullet {
 
     /**
      * 移动速度
@@ -161,7 +163,7 @@ public class Bullet {
             tank.die();
             int eX = tank.getX() + tank.WIDTH / 2 - Explode.WIDTH / 2;
             int eY = tank.getY() + tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-            tf.explodes.add(new Explode(eX, eY, tf));
+            tf.explodes.add(tf.gf.createExplode(eX, eY, tf));
         }
     }
 

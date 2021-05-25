@@ -1,9 +1,11 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.abstractfactory.BaseTank;
+
 import java.awt.*;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends BaseTank {
 
     private int x, y;
 

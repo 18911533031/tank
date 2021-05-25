@@ -1,8 +1,10 @@
 package com.mashibing.tank;
 
+import com.mashibing.tank.abstractfactory.BaseExplode;
+
 import java.awt.*;
 
-public class Explode {
+public class Explode extends BaseExplode {
 
     private int x = 300, y = 300;
 
@@ -42,6 +44,7 @@ public class Explode {
      *
      * @param g 画笔
      */
+    @Override
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
 
