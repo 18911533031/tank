@@ -14,7 +14,7 @@ public class DefaultFactory extends GameFactory {
     }
 
     @Override
-    public BaseBullet createBullet(int x, int y, TankFrame tf) {
-        return null;
+    public BaseBullet createBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+        return new Bullet(x, y, dir, group, tf);
     }
 }

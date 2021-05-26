@@ -6,9 +6,9 @@ import com.mashibing.tank.TankFrame;
 
 public abstract class GameFactory {
     //坦克
-    public abstract BaseTank createTank(int x, int y, Dir dir, Group group, TankFrame tankFrame);
+    public abstract BaseTank createTank(int x, int y, Dir dir, Group group, TankFrame tf);
     //爆炸
-    public abstract BaseExplode createExplode(int x, int y, TankFrame tankFrame);
+    public abstract BaseExplode createExplode(int x, int y, TankFrame tf);
     //子弹
-    public abstract BaseBullet createBullet(int x, int y, TankFrame tankFrame);
+    public abstract BaseBullet createBullet(int x, int y,Dir dir,Group group, TankFrame tf);
 }

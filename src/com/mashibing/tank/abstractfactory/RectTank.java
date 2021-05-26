@@ -1,14 +1,13 @@
-package com.mashibing.tank;
+package com.mashibing.tank.abstractfactory;
 
-import com.mashibing.tank.abstractfactory.BaseTank;
+import com.mashibing.tank.*;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Tank extends BaseTank {
+public class RectTank extends BaseTank {
 
     private int x, y;
-
     /**
      * 方向
      */
@@ -30,7 +29,7 @@ public class Tank extends BaseTank {
     private Random random = new Random();
 
     /**
-     * 区分队伍--放在了父类
+     * 区分队伍--已放在父类
      */
 //    private Group group = Group.GOOD;
 
@@ -40,6 +39,14 @@ public class Tank extends BaseTank {
 
     public void setLiving(boolean living) {
         this.living = living;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     /**
@@ -68,7 +75,7 @@ public class Tank extends BaseTank {
      * @param dir 方向
      * @param tf  主方法
      */
-    public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectTank(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -84,19 +91,19 @@ public class Tank extends BaseTank {
          * 主角光环，发射四个方向子弹
          */
         PropertyMgr propertyMgr = PropertyMgr.getInstance();
-        if (group == Group.BAD){
+        if (group == Group.BAD) {
             String defaultFire = (String) propertyMgr.getKey("defaultFire");
             try {
                 fs = (FireStartegy) Class.forName(defaultFire).newInstance();
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 //            fs = new DefaultFireStartegy();
-        }else {
+        } else {
             String fourDirFire = (String) propertyMgr.getKey("fourDirFire");
             try {
                 fs = (FireStartegy) Class.forName(fourDirFire).newInstance();
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 //            fs = new FourDirFireStartegy();
@@ -120,22 +127,10 @@ public class Tank extends BaseTank {
 //        g.setColor(color);
 
         //坦克
-        switch (dir) {
-            case LEFT:
-                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankL : ResourceMgr.goodTankL, x, y, null);
-                break;
-            case UP:
-                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankU : ResourceMgr.goodTankU, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankR : ResourceMgr.goodTankR, x, y, null);
-                break;
-            case DOWN:
-                g.drawImage(this.group == Group.BAD ? ResourceMgr.badTankD : ResourceMgr.goodTankD, x, y, null);
-                break;
-        }
-
-
+        Color c = g.getColor();
+        g.setColor(group == Group.GOOD ? Color.RED : Color.BLUE);
+        g.fillRect(x, y, 40, 40);
+        g.setColor(c);
         move();
     }
 
@@ -180,8 +175,8 @@ public class Tank extends BaseTank {
     private void boundsCheck() {
         if (this.x < 2) x = 2;
         if (this.y < 28) y = 28;
-        if (this.x > TankFrame.GAME_WIDTH - Tank.WIDTH - 2) x = TankFrame.GAME_WIDTH - Tank.WIDTH - 2;
-        if (this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2) y = TankFrame.GAME_HEIGHT - Tank.HEIGHT - 2;
+        if (this.x > TankFrame.GAME_WIDTH - RectTank.WIDTH - 2) x = TankFrame.GAME_WIDTH - RectTank.WIDTH - 2;
+        if (this.y > TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2) y = TankFrame.GAME_HEIGHT - RectTank.HEIGHT - 2;
     }
 
     /**
@@ -225,6 +220,7 @@ public class Tank extends BaseTank {
 
     public void fire() {
 //        fs.fire(this);
+        //正方形情况下：x+2分1之坦克宽度 - 子弹2分1宽度
         int bX = this.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
         int bY = this.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 
@@ -233,7 +229,7 @@ public class Tank extends BaseTank {
             this.tf.gf.createBullet(bX + 1, bY + 4, dir, this.getGroup(), this.tf);
         }
 
-        if(this.getGroup() == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();
+        if (this.getGroup() == Group.GOOD) new Thread(() -> new Audio("audio/tank_fire.wav").play()).start();
     }
 
     public void die() {

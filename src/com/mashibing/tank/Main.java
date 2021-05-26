@@ -12,7 +12,7 @@ public class Main {
         int initTankCount = Integer.parseInt((String)PropertyMgr.getInstance().getKey("initTankCount"));
 
         for (int i = 0; i < initTankCount; i++) {
-            tf.tanks.add(new Tank(80 + i* 60, 80, Dir.DOWN, Group.BAD, tf));
+            tf.tanks.add(tf.gf.createTank(80 + i* 60, 80, Dir.DOWN, Group.BAD, tf));
         }
 
         new Thread(()->new Audio("audio/war1.wav").play()).start();

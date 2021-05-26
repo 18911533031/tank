@@ -7,16 +7,16 @@ import com.mashibing.tank.TankFrame;
 public class RectFactory extends GameFactory {
     @Override
     public BaseTank createTank(int x, int y, Dir dir, Group group, TankFrame tankFrame) {
-        return null;
+        return new RectTank(x,y,dir,group,tankFrame);
     }
 
     @Override
-    public BaseExplode createExplode(int x, int y, TankFrame tankFrame) {
-        return null;
+    public BaseExplode createExplode(int x, int y, TankFrame tf) {
+        return new RectExplode(x, y, tf);
     }
 
     @Override
-    public BaseBullet createBullet(int x, int y, TankFrame tankFrame) {
-        return null;
+    public BaseBullet createBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+        return new RectBullet(x, y, dir, group, tf);
     }
 }

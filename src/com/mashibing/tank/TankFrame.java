@@ -1,9 +1,7 @@
 package com.mashibing.tank;
 
 
-import com.mashibing.tank.abstractfactory.BaseExplode;
-import com.mashibing.tank.abstractfactory.DefaultFactory;
-import com.mashibing.tank.abstractfactory.GameFactory;
+import com.mashibing.tank.abstractfactory.*;
 
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -22,11 +20,11 @@ public class TankFrame extends Frame {
     /**
      * 子弹列表
      */
-    public List<Bullet> bullets = new ArrayList<>();
+    public List<BaseBullet> bullets = new ArrayList<>();
     /**
      * 敌人坦克
      */
-    public List<Tank> tanks = new ArrayList<>();
+    public List<BaseTank> tanks = new ArrayList<>();
     /**
      * 爆炸效果
      */
@@ -38,12 +36,12 @@ public class TankFrame extends Frame {
     /**
      * 初始化工厂
      */
-    public GameFactory gf = new DefaultFactory();
+    public GameFactory gf = new RectFactory();
 
     /**
      * 游戏的宽和高
      */
-    static final int GAME_WIDTH = 1200, GAME_HEIGHT = 1000;
+    public static final int GAME_WIDTH = 1200, GAME_HEIGHT = 1000;
 
     /**
      * 生成游戏界面

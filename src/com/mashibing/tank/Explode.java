@@ -47,28 +47,11 @@ public class Explode extends BaseExplode {
     @Override
     public void paint(Graphics g) {
         g.drawImage(ResourceMgr.explodes[step++], x, y, null);
-
+        //大到一定程度是删除
         if (step >= ResourceMgr.explodes.length) {
             step = 0;
             tf.explodes.remove(this);
         }
-    }
-
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
 }

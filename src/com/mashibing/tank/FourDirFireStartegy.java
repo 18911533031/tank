@@ -9,7 +9,7 @@ public class FourDirFireStartegy implements FireStartegy{
 
         Dir[] values = Dir.values();
         for (Dir dir : values) {
-            new Bullet(bX + 1, bY + 4, dir, t.getGroup(), t.tf);
+            t.tf.gf.createBullet(bX + 1, bY + 4, dir, t.getGroup(), t.tf);
         }
 
         if(t.getGroup() == Group.GOOD) new Thread(()->new Audio("audio/tank_fire.wav").play()).start();

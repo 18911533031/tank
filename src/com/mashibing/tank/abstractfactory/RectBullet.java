@@ -1,11 +1,10 @@
-package com.mashibing.tank;
+package com.mashibing.tank.abstractfactory;
 
-import com.mashibing.tank.abstractfactory.BaseBullet;
-import com.mashibing.tank.abstractfactory.BaseTank;
+import com.mashibing.tank.*;
 
 import java.awt.*;
 
-public class Bullet extends BaseBullet {
+public class RectBullet extends BaseBullet {
 
     /**
      * 移动速度
@@ -37,7 +36,7 @@ public class Bullet extends BaseBullet {
     /**
      * 子弹区分队伍
      */
-    private Group group = Group.GOOD;
+    private Group group = Group.BAD;
 
     /**
      * 子弹构造方法
@@ -47,7 +46,7 @@ public class Bullet extends BaseBullet {
      * @param dir 方向
      * @param tf  主方法
      */
-    public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+    public RectBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.dir = dir;
@@ -78,22 +77,11 @@ public class Bullet extends BaseBullet {
         g.setColor(Color.RED);
         g.fillOval(x, y, 30, 30);
         g.setColor(c);*/
+        Color c = g.getColor();
+        g.setColor(Color.YELLOW);
+        g.fillRect(x, y, 20, 20);
+        g.setColor(c);
 
-
-        switch (dir) {
-            case LEFT:
-                g.drawImage(ResourceMgr.bulletL, x, y, null);
-                break;
-            case UP:
-                g.drawImage(ResourceMgr.bulletU, x, y, null);
-                break;
-            case RIGHT:
-                g.drawImage(ResourceMgr.bulletR, x, y, null);
-                break;
-            case DOWN:
-                g.drawImage(ResourceMgr.bulletD, x, y, null);
-                break;
-        }
 
         move();
 
